@@ -16,7 +16,14 @@ router.post('/api/burger', function(req, res){
 });
 
 router.put('/api/burger/:id', function(req, res){
-	burger.updateOne('burger_name', req.params.id, function(result){
+	burger.updateOne('burger_name', req.body, function(result){
+		res.json({id: result.insertId});
+	});
+});
+
+router.delete('/api/burger/:id', function(req, res){
+	console.log(req.params.id);
+	burger.deleteOne('burger_name', req.params.id, function(result){
 		res.json({id: result.insertId});
 	});
 });

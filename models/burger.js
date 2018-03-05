@@ -15,8 +15,16 @@ var burger = {
 	},
 
 	updateOne: function(cols, data, callback){
+		console.log("updateOne", data);
 		orm.updateOne('burgers', cols, data, function(result){
 			console.log("Updated burger" , result);
+			callback(result);
+		});
+	},
+
+	deleteOne: function(cols, data, callback){
+		orm.deleteOne('burgers', cols, data, function(result){
+			console.log("Deleted burger" , result);
 			callback(result);
 		});
 	}

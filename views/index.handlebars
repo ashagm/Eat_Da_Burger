@@ -11,7 +11,8 @@
   {{#each burgers}}
   	{{#unless devoured}}
 		<li>{{burger_name}} 
-			<button class="btn_devour" data-id={{id}}>Devour</button>
+			<button class="btn_devour" data-devour={{devoured}} data-id={{id}}>Devour it</button>
+			<button class="btn_trash" data-id={{id}}>Trash it</button>
 		</li>
   	{{/unless}}
   {{/each}}
@@ -25,6 +26,9 @@
   {{#each burgers}}
     {{#if devoured}}
       <li>{{burger_name}}</li>
+      	<button class="btn_devour" data-devour={{devoured}} data-id={{id}}>Return it</button>
+	  	<button class="btn_trash" data-id={{id}}>Trash it</button>
+	  </li>	
     {{/if}}
   {{/each}}
 </ul>
@@ -44,13 +48,33 @@
 
 $('.btn_devour').on('click', function(){
 	let btnId = $(this).data('id');
+	let devoured = $(this).data('devour');
+
+	let data = {
+		id : btnId,
+		devoured : devoured
+	}
 
 	$.ajax("/api/burger/" + btnId, {
       type: "PUT",
-      data: btnId
+      data: data
     }).then(
       function() {
         console.log("Updated new Burger");
+        location.reload();
+      }
+    );
+});
+
+$('.btn_trash').on('click', function(){
+	let btnId = $(this).data('id');
+	console.log(btnId);
+
+	$.ajax("/api/burger/" + btnId, {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("DELETED new Burger");
         location.reload();
       }
     );
@@ -63,7 +87,6 @@ $('.btn_devour').on('click', function(){
       name: $("#burger_new").val().trim(),
     };
 
-    // Send the POST request.
     $.ajax("/api/burger", {
       type: "POST",
       data: newBurger
