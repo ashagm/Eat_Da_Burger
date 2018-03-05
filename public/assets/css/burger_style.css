@@ -1,0 +1,44 @@
+body{
+	margin: 0 auto;
+	background: url("../images/background_2.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: 'Prata', cursive;
+}
+
+#div_header{
+	margin: 20px 0px;
+	color: #ffffff;
+	font-size: 48px;
+}
+
+#div_add label{
+	color: #fff;
+	font-size: 20px;
+}
+
+#btn_submit{
+	margin: 10px;
+}
+
+#div_burgers{
+	margin: 20px;
+}
+
+#image_main{
+	margin-top: 20px;
+}
+#burger_image{
+	width: 300px;
+	height: 300px;
+}
+
+#burgers_available li,
+#burgers_gone li{
+	background-color: grey;
+	border: 1px solid red;
+}
+
+ul { margin: 0; padding : 0; list-style-type: none;}
+
+li { margin: 10px 0px; padding: 5px;}
